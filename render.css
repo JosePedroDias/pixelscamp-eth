@@ -1,0 +1,13 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+svg {
+  border: 1px solid #AAA;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -500px;
+  margin-top: -400px;
+}

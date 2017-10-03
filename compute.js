@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const projectsWithWallet = require('./projects-with-wallet.json');
 const w2p = {}; // accNo/wallet 2 project
 projectsWithWallet.forEach(o => {
@@ -196,6 +198,19 @@ transactions.forEach(t => {
 });
 
 const users = Object.values(w2u);
+
+const users0 = users.slice();
 function getV(u) { return u.sentProjects; } // sentProjects rcvdEth
-users.sort(function (u1, u2) { return sigma(getV(u1) - getV(u2)); })
-console.log(users.reverse().splice(0, 10));
+users0.sort(function (u1, u2) { return sigma(getV(u1) - getV(u2)); })
+//console.log(users0.reverse().splice(0, 10));
+
+
+
+const dfb = {
+  transactions: transactions,
+  w2u: w2u,
+  w2p: w2p,
+  a2n: a2n,
+  u2p: u2p
+};
+fs.writeFileSync('data-for-browser.json', JSON.stringify(dfb));
