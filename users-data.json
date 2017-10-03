@@ -1,0 +1,554 @@
+[
+  {
+    "login": "0xacb",
+    "name": "André Baptista",
+    "company": "",
+    "wallet": "0xA96d3aD20d10ff2d28026b119b7218e482610Bc1"
+  },
+  {
+    "login": "3devangelist",
+    "name": "Ricardo Pereira",
+    "company": "Hardware city",
+    "wallet": "0x677dEDeD346Ed4B4e02558DE5d3260DAb3B16445"
+  },
+  {
+    "login": "3dk",
+    "name": "Eduard Kulchinsky",
+    "company": "Synopsys",
+    "wallet": null
+  },
+  {
+    "login": "45yoda",
+    "name": "João Cabo",
+    "company": "",
+    "wallet": "0x294b91E37651da23b5BC8C86Fc39918eB64C8e4a"
+  },
+  {
+    "login": "9thscientist",
+    "name": "Bruno Cancelinha",
+    "company": "",
+    "wallet": "0x71ECCFac9682FcDED40f419222343c5cea8eF87e"
+  },
+  {
+    "login": "a-sac",
+    "name": "Sérgio Costa",
+    "company": "",
+    "wallet": "0x7E612Bf46026bE8da2974df207166805C5c506c2"
+  },
+  {
+    "login": "a78275",
+    "name": "JOANA PEREIRA",
+    "company": "",
+    "wallet": ""
+  },
+  {
+    "login": "abmantis",
+    "name": "Abílio Costa",
+    "company": "NDrive Navigation Systems",
+    "wallet": "0x09041dea34E29F57ce54c1a4512BC12a085D56a6"
+  },
+  {
+    "login": "abriosi",
+    "name": "Gonçalo Abreu",
+    "company": "Gonçalo Faria Abreu",
+    "wallet": ""
+  },
+  {
+    "login": "aclima93",
+    "name": "António Lima",
+    "company": "Deemaze",
+    "wallet": "0xB2704097Ff6C591C2Bcbf0D8465B87906E609456"
+  },
+  {
+    "login": "acmpires",
+    "name": "Carlos Pires",
+    "company": "PTC, SAPO Mail",
+    "wallet": ""
+  },
+  {
+    "login": "adamiaonr",
+    "name": "Damião Rodrigues",
+    "company": "Carnegie Mellon University (Pittsburgh, USA), University of Porto (Portugal)",
+    "wallet": ""
+  },
+  {
+    "login": "adaptive",
+    "name": "Hugo Romano",
+    "company": "Wind Birds",
+    "wallet": "0x8dB088DEd709e43AF5A44eb8beb54b987e7f39Ab"
+  },
+  {
+    "login": "adbjesus",
+    "name": "Alexandre Jesus",
+    "company": "Whitesmith",
+    "wallet": "0x4FB158B0ec48Fe11D335ffD3C3179306f79Ea9BA"
+  },
+  {
+    "login": "adrianasg122",
+    "name": "Adriana da Santa Guedes",
+    "company": "",
+    "wallet": null
+  },
+  {
+    "login": "adrianovaz",
+    "name": "Adriano Fernandes Vaz",
+    "company": "Active Mentis",
+    "wallet": "0xE5195A327e1CBD664D7C3EbBeB019fB8ADe36648"
+  },
+  {
+    "login": "aerogato",
+    "name": "Sergio Filipe Santo Dias",
+    "company": "Universidade de Lisboa - Instituto Superior Tecnico",
+    "wallet": ""
+  },
+  {
+    "login": "afonsocsc",
+    "name": "Afonso Cordeiro",
+    "company": "Tio Atum",
+    "wallet": ""
+  },
+  {
+    "login": "afonsograca",
+    "name": "Afonso",
+    "company": "",
+    "wallet": null
+  },
+  {
+    "login": "afonsus1997",
+    "name": "Afonso Muralha",
+    "company": "",
+    "wallet": "0xE74ab0284B7EFbf9ff1BD7c3eFc1C7accC5A41e7"
+  },
+  {
+    "login": "agarces001",
+    "name": "André Garcês",
+    "company": "Feet IT Technologies",
+    "wallet": ""
+  },
+  {
+    "login": "agrancho",
+    "name": "Alexandra Grancho",
+    "company": "Whitesmith",
+    "wallet": "0xe0f0E85AF5b4b747b25a345685187dd8B1aD70a9"
+  },
+  {
+    "login": "ailenolx",
+    "name": "Ailen Lima",
+    "company": "OLX Group",
+    "wallet": ""
+  },
+  {
+    "login": "ajcamilo",
+    "name": "André Camilo",
+    "company": "Premium Minds, Lda",
+    "wallet": null
+  },
+  {
+    "login": "ajscarvalho",
+    "name": "Alexandre Amaral de Carvalho",
+    "company": "Widescope",
+    "wallet": "0xdafd55eD9446A659734C0e833FD99B0A06Cdb268"
+  },
+  {
+    "login": "akarupt",
+    "name": "Rafael pereira",
+    "company": "Contágio",
+    "wallet": "0x165dc2B5481E829F50eA3135d6baeA9776DEf9C9"
+  },
+  {
+    "login": "akilino",
+    "name": "Aquilino Abreu da Silva",
+    "company": "Instituto superior técnico ",
+    "wallet": null
+  },
+  {
+    "login": "brunoguerracunha",
+    "name": "Bruno Guerra Cunha",
+    "company": "Unbabel",
+    "wallet": ""
+  },
+  {
+    "login": "cryophoenix",
+    "name": "Kevin Loaec",
+    "company": "Chainsmiths",
+    "wallet": "0x6034AAbB95c5f685514d5FA67559A91Ac6d1A4b7"
+  },
+  {
+    "login": "dbritopt",
+    "name": "Diogo Brito",
+    "company": "Codefive",
+    "wallet": "0xbF19119789dB275BF303972592b4031397b795b2"
+  },
+  {
+    "login": "egrocha",
+    "name": "Eduardo Rocha",
+    "company": "",
+    "wallet": null
+  },
+  {
+    "login": "fcisca",
+    "name": "Maria Francisca Abrantes",
+    "company": "",
+    "wallet": ""
+  },
+  {
+    "login": "felipegarciaolx",
+    "name": "Felipe Florencio Garcia",
+    "company": "OLX",
+    "wallet": ""
+  },
+  {
+    "login": "felippemora",
+    "name": "Felippe Mora",
+    "company": "Feedzai",
+    "wallet": null
+  },
+  {
+    "login": "fernandoafonso",
+    "name": "Fernando Afonso",
+    "company": "",
+    "wallet": ""
+  },
+  {
+    "login": "ferreiratiago",
+    "name": "Tiago Lopes Ferreira",
+    "company": "betfair",
+    "wallet": "0x8662ebAf0F2f4F392e94f773E028b9092399D8DB"
+  },
+  {
+    "login": "ff56",
+    "name": "Hugo Cardoso",
+    "company": "Endless Loop Studios",
+    "wallet": ""
+  },
+  {
+    "login": "fil090302",
+    "name": "Filipe Pereira",
+    "company": "Airport AI",
+    "wallet": "0x5442ef94BE09Be174a068C5a4279937151093835"
+  },
+  {
+    "login": "filas95",
+    "name": "Filipe Domingues",
+    "company": "",
+    "wallet": ""
+  },
+  {
+    "login": "filfreire",
+    "name": "Filipe Freire",
+    "company": "Blip",
+    "wallet": "0xB5dD2b1DA7e43f5A1E857a4061a65cD0A1EF33A0"
+  },
+  {
+    "login": "filipabarros",
+    "name": "Filipa Barros",
+    "company": "",
+    "wallet": null
+  },
+  {
+    "login": "filipacsr",
+    "name": "Filipa Rodrigues",
+    "company": "BinaryEdge",
+    "wallet": null
+  },
+  {
+    "login": "filipecabaco",
+    "name": "Filipe Cabaço",
+    "company": "Talkdesk",
+    "wallet": "0xC5b9dDCDeD715978f40Ef3bFeFCcA06795fD8AaC"
+  },
+  {
+    "login": "filipediasf",
+    "name": "Filipe Dias",
+    "company": "MOXY",
+    "wallet": null
+  },
+  {
+    "login": "filipegouveia",
+    "name": "Filipe Gouveia",
+    "company": "",
+    "wallet": "0x235414BdF4766C06A793BD29bcdBF8D504F01713"
+  },
+  {
+    "login": "filipemcarvalho",
+    "name": "Filipe Carvalho",
+    "company": "Farfetch",
+    "wallet": null
+  },
+  {
+    "login": "fmdcarvalho",
+    "name": "Filipe Carvalho",
+    "company": ".componto.",
+    "wallet": "0x443Af6F1B302b04Ac5Fc58335B4Cc5DfC2c6B457"
+  },
+  {
+    "login": "fmendes6",
+    "name": "Filipe Mendes",
+    "company": "",
+    "wallet": ""
+  },
+  {
+    "login": "fmendes75",
+    "name": "Francisco Mendes",
+    "company": "Hardware City",
+    "wallet": "0xe4E644479d7303079641091552dBFde41e82D813"
+  },
+  {
+    "login": "fmjgomes",
+    "name": "Fábio  Gomes",
+    "company": "Técnico Lisboa, Integrity ",
+    "wallet": null
+  },
+  {
+    "login": "fmnc",
+    "name": "Fernando Carvalho",
+    "company": "sislog",
+    "wallet": null
+  },
+  {
+    "login": "idavim",
+    "name": "Inês Davim",
+    "company": "",
+    "wallet": ""
+  },
+  {
+    "login": "ih95",
+    "name": "Iqra Hamid",
+    "company": "",
+    "wallet": "0x37BF07c9f86785B7cb36b255d0b60d06d59384b9"
+  },
+  {
+    "login": "jnogueira",
+    "name": "João Nuno Nogueira",
+    "company": "Whitesmith",
+    "wallet": "0x872E5680f76E5872a998b395840eE84a83b48bFb"
+  },
+  {
+    "login": "jpccarmo",
+    "name": "João Pedro Coelho do Carmo",
+    "company": "",
+    "wallet": null
+  },
+  {
+    "login": "jpcsousa",
+    "name": "João Paulo Coimbra de Sousa",
+    "company": "ODDBureau",
+    "wallet": "0x930659102856c705E8CD5bbeD65b78c8c1b3eDa9"
+  },
+  {
+    "login": "jpdias",
+    "name": "João Pedro Dias",
+    "company": "INESC TEC Porto",
+    "wallet": "0x70874956Bee365A42315DBE5C67b7216e3af6beD"
+  },
+  {
+    "login": "jpedrofontes",
+    "name": "João Pedro Fontes",
+    "company": "Universidade do Minho",
+    "wallet": ""
+  },
+  {
+    "login": "jpfonseca",
+    "name": "João Fonseca",
+    "company": "Universidade de Aveiro",
+    "wallet": "0xe7dA8aab98188179fcaA6775B3DD01393596f182"
+  },
+  {
+    "login": "jpgbarbosa",
+    "name": "João Barbosa",
+    "company": "Whitesmith",
+    "wallet": "0x0f9Ba039221De11717484313cBb6f01B54858F47"
+  },
+  {
+    "login": "jpgcc",
+    "name": "João Craveiro",
+    "company": "Onfido",
+    "wallet": null
+  },
+  {
+    "login": "marcosfmandrade",
+    "name": "Marcos",
+    "company": "",
+    "wallet": null
+  },
+  {
+    "login": "marcosrebelo",
+    "name": "Marcos Rebelo",
+    "company": "Home24",
+    "wallet": null
+  },
+  {
+    "login": "mariajoaomirapaulo",
+    "name": "Maria João Mira Paulo",
+    "company": "FEUP",
+    "wallet": ""
+  },
+  {
+    "login": "mariamargarida",
+    "name": "Maria Margarida",
+    "company": "1776",
+    "wallet": "0x813E01EA31265cA171a4D6ADC8f6DB3B2533A4B5"
+  },
+  {
+    "login": "mariampissarra",
+    "name": "Maria Pissarra",
+    "company": "",
+    "wallet": "0x7dD332d042EEF2d5a045d55a1A092BAB99236214"
+  },
+  {
+    "login": "mariana-kikloki",
+    "name": "Mariana Fernandes",
+    "company": "",
+    "wallet": "0xbdd78a070D78cD6347f875c47D002eE56e495dBd"
+  },
+  {
+    "login": "mariobento",
+    "name": "Mário Gaudencio",
+    "company": "MeshApp",
+    "wallet": null
+  },
+  {
+    "login": "miguelduarte42",
+    "name": "Miguel Duarte",
+    "company": "",
+    "wallet": null
+  },
+  {
+    "login": "miguelhralmeida",
+    "name": "Miguel Almeida",
+    "company": "NInf FCT NOVA",
+    "wallet": ""
+  },
+  {
+    "login": "miguelpinto98",
+    "name": "Miguel Pinto",
+    "company": "Performetric ",
+    "wallet": null
+  },
+  {
+    "login": "miguelrebola21",
+    "name": "Miguel Rebola",
+    "company": "Baseform",
+    "wallet": null
+  },
+  {
+    "login": "miguelsantos29",
+    "name": "Jose Miguel da Silva Santos",
+    "company": "Universidade do Minho",
+    "wallet": ""
+  },
+  {
+    "login": "miguelsilva96",
+    "name": "Miguel Silva",
+    "company": "",
+    "wallet": "0xfA0605f0aeab4915E4C4B03d71B136F8e828359E"
+  },
+  {
+    "login": "migvieira",
+    "name": "Miguel Vieira",
+    "company": "Feet It",
+    "wallet": "0x11F8666eC49dF3599770c670cc548872541B23E3"
+  },
+  {
+    "login": "pedrocosta22",
+    "name": "Pedro Costa",
+    "company": "",
+    "wallet": ""
+  },
+  {
+    "login": "ricardobrazao",
+    "name": "Ricardo Brazão",
+    "company": "Onfido",
+    "wallet": null
+  },
+  {
+    "login": "ricardoffp",
+    "name": "Ricardo Prates",
+    "company": "Observador",
+    "wallet": ""
+  },
+  {
+    "login": "ricardosncosta",
+    "name": "Ricardo Costa",
+    "company": "Dengun",
+    "wallet": null
+  },
+  {
+    "login": "ricardoteixas",
+    "name": "Ricardo F. Teixeira",
+    "company": "Feedzai",
+    "wallet": ""
+  },
+  {
+    "login": "samworkout",
+    "name": "Samuel Junqueira",
+    "company": "Morsum LLC",
+    "wallet": null
+  },
+  {
+    "login": "sandrina-p",
+    "name": "Sandrina Pereira",
+    "company": "Farfetch",
+    "wallet": null
+  },
+  {
+    "login": "sandro-fernandes",
+    "name": "Sandro Fernandes",
+    "company": "Instituto Superior Técnico",
+    "wallet": null
+  },
+  {
+    "login": "sandromf",
+    "name": "Sandro Micael Ferreira Monteiro",
+    "company": "Bizdirect",
+    "wallet": "0xfcf95817f2450653e8e300515238D3B175711947"
+  },
+  {
+    "login": "saraivan",
+    "name": "Nuno Saraiva",
+    "company": "Seed accounting, Lda",
+    "wallet": "0x476A0939De83E134998dc94370c10369cd714E90"
+  },
+  {
+    "login": "tiago-figueiredo",
+    "name": "Tiago Figueiredo",
+    "company": "OLX",
+    "wallet": "0x36EA8f4ee0179ec7b7D905F9f1B2398AE525F1A9"
+  },
+  {
+    "login": "tiago-rocha",
+    "name": "Tiago Rocha",
+    "company": "@VetAppPT ",
+    "wallet": "0x776F18e625bCaAeEf91759b64EE1eD00d5e59DAB"
+  },
+  {
+    "login": "vitorpeixoto97",
+    "name": "Vitor Peixoto",
+    "company": "MIEI@UMinho",
+    "wallet": "0xEd734ebbDD48b421F675E347bf8b6a86b6939681"
+  },
+  {
+    "login": "vpinho",
+    "name": "Vasco Pinho",
+    "company": "Shelf AI",
+    "wallet": ""
+  },
+  {
+    "login": "vveloso",
+    "name": "Vasco Veloso",
+    "company": "Coriant",
+    "wallet": "0x22c4909Bf65d056cbE0b8fcB77b48E329afe7511"
+  },
+  {
+    "login": "wavvves",
+    "name": "Paulo Arromba",
+    "company": "7graus",
+    "wallet": null
+  },
+  {
+    "login": "wendelladriel",
+    "name": "Wendell Adriel",
+    "company": "CrossOver",
+    "wallet": ""
+  }
+]
