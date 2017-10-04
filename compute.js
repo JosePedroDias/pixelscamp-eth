@@ -42,7 +42,7 @@ projectsWithWallet.forEach(p => {
 //console.log(u2p);
 
 
-const transactions0 = require('./transactions.json').slice(1322); // the slice removes transaction since bankrupcy started
+const transactions0 = require('./transactions.json');//.slice(1322); // the slice removes transaction since bankrupcy started
 const transactions = transactions0.map((t, i) => {
   return {
     f: (t.from).substring(2).toLowerCase(),
