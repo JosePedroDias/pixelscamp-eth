@@ -1,19 +1,12 @@
 html, body {
   padding: 0;
   margin: 0;
-  height: 100%;
-  overflow: hidden;
   font-family: sans-serif;
 }
 
 svg {
   border: 1px solid #AAA;
   background-color: #EEE;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -600px;
-  margin-top:  -600px;
 }
 
 .overlay {

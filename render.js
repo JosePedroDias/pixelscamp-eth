@@ -6,6 +6,58 @@ fetch('data-for-browser.json')
 
 
 function go(transactions, w2u, w2p, u2p, a2n) {
+  function sign(n) { return (n < 0 ? -1 : (n > 0 ? 1 : 0)); }
+
+  function sortNumber(a, b) {
+    return sign(a - b);
+  }
+
+  function sortDesc(sortFn) {
+    return function (a, b) {
+      return sortFn(b, a);
+    }
+  }
+
+  function nthIndexer(idx) {
+    return function (arr) {
+      return arr[idx];
+    }
+  }
+
+  function sort(arr, indexer, sortFn) {
+    arr.sort(function (a, b) { return sortFn(indexer(a), indexer(b)); })
+  }
+
+
+
+  function EL(_nodeName, _attrs, _children) {
+    let attrs = {}, children = [];
+    const argLen = arguments.length;
+    if (argLen === 1) { return document.createTextNode(_nodeName); }
+    else if (argLen === 2) {
+      if (_attrs instanceof Array) { children = _attrs; }
+      else if (_attrs instanceof Object) { attrs = _attrs; }
+      else { throw new Error('2nd arg must be either an object (attrs) or an array (children)!'); }
+    }
+    else if (argLen === 3) { attrs = _attrs; children = _children; }
+    else { throw new Error('Wrong number of params!'); }
+    const classes = (_nodeName.indexOf('.') === -1) ? [_nodeName] : _nodeName.split('.');
+    const nodeName = classes.shift();
+    const el = document.createElement(nodeName);
+    classes.forEach(cl => el.classList.add(cl));
+    Object.keys(attrs).forEach(at => {
+      if (at.substring(0, 2) === 'on') {
+        el.addEventListener(at.substring(2), attrs[at]);
+      } else {
+        el.setAttribute(at, attrs[at]);
+      }
+    });
+    children.forEach(chEl => el.appendChild(typeof chEl === 'string' ? EL(chEl) : chEl));
+    return el;
+  }
+
+
+
   function isAngel(accNo) {
     return accNo in a2n;
   }
@@ -17,6 +69,8 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   function isProject(accNo) {
     return accNo in w2p;
   }
+
+
 
   const specialAccounts = {
     '3d417b8305aa60688385a1ca56530130c77f8739': 'PIXELSCAMP',
@@ -86,6 +140,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   }
 
 
+
   const W = 1200;
   const H = 1200;
   const M = 50;
@@ -115,56 +170,6 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   }
 
 
-
-  function sign(n) { return (n < 0 ? -1 : (n > 0 ? 1 : 0)); }
-
-  function sortNumber(a, b) {
-    return sign(a - b);
-  }
-
-  function sortDesc(sortFn) {
-    return function (a, b) {
-      return sortFn(b, a);
-    }
-  }
-
-  function nthIndexer(idx) {
-    return function (arr) {
-      return arr[idx];
-    }
-  }
-
-  function sort(arr, indexer, sortFn) {
-    arr.sort(function (a, b) { return sortFn(indexer(a), indexer(b)); })
-  }
-
-
-
-  function EL(_nodeName, _attrs, _children) {
-    let attrs = {}, children = [];
-    const argLen = arguments.length;
-    if (argLen === 1) { return document.createTextNode(_nodeName); }
-    else if (argLen === 2) {
-      if (_attrs instanceof Array) { children = _attrs; }
-      else if (_attrs instanceof Object) { attrs = _attrs; }
-      else { throw new Error('2nd arg must be either an object (attrs) or an array (children)!'); }
-    }
-    else if (argLen === 3) { attrs = _attrs; children = _children; }
-    else { throw new Error('Wrong number of params!'); }
-    const classes = (_nodeName.indexOf('.') === -1) ? [_nodeName] : _nodeName.split('.');
-    const nodeName = classes.shift();
-    const el = document.createElement(nodeName);
-    classes.forEach(cl => el.classList.add(cl));
-    Object.keys(attrs).forEach(at => {
-      if (at.substring(0, 2) === 'on') {
-        el.addEventListener(at.substring(2), attrs[at]);
-      } else {
-        el.setAttribute(at, attrs[at]);
-      }
-    });
-    children.forEach(chEl => el.appendChild(typeof chEl === 'string' ? EL(chEl) : chEl));
-    return el;
-  }
 
   function killOverlay(ev) {
     if (ev) { // was clicked, remove hash
@@ -413,8 +418,10 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     const angle = Math.PI * 2 / len;
     sort(nodes, getRadius, sortNumber);
     nodes.forEach((n, i) => {
-      const s = ~~(i / len * rows);
-      const a = angle * (s + 1) * i;
+      //const s = ~~(i / len * rows);
+      //const s = 0;
+      const s = rows - (i % rows);
+      const a = angle * i;
       const r = radius + s * dr;// + ((a % PI2) / PI2) * dr;
       //console.log(s, r, a);
       n.animate({
