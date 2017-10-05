@@ -456,8 +456,8 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     EL('div', [
       EL('button', { onclick: layoutFact('a', 1, 40, 190) }, ['layout angels']),
       EL('button', { onclick: layoutFact('u', 4, 30, 400) }, ['layout users']),
-      EL('button', { onclick: layoutFact('p', 2, 60, 280) }, ['layout projects']),
-      EL('button', { onclick: layoutFact('o', 3, 30, 1.5 * 20) }, ['layout other'])
+      EL('button', { onclick: layoutFact('p', 2, 60, 240) }, ['layout projects']),
+      EL('button', { onclick: layoutFact('o', 3, 40, 40) }, ['layout other'])
     ]),
   ]);
   document.body.appendChild(guiEl);
