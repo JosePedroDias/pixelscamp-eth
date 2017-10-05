@@ -77,3 +77,16 @@ svg {
 .acc-user { background-color: orange; }
 .acc-puser { background-color: orange; }
 .acc-other { background-color: gray; color: #FFF; }
+
+.dismiss {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  color: #FFF;
+  background-color: #A00;
+  text-align: center;
+  line-height: 30px;
+  padding: 0;
+}

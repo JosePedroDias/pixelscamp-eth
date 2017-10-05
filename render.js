@@ -114,6 +114,8 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     }, []);
   }
 
+
+
   function sign(n) { return (n < 0 ? -1 : (n > 0 ? 1 : 0)); }
 
   function sortNumber(a, b) {
@@ -153,7 +155,13 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     const nodeName = classes.shift();
     const el = document.createElement(nodeName);
     classes.forEach(cl => el.classList.add(cl));
-    Object.keys(attrs).forEach(at => el.setAttribute(at, attrs[at]));
+    Object.keys(attrs).forEach(at => {
+      if (at.substring(0, 2) === 'on') {
+        el.addEventListener(at.substring(2), attrs[at]);
+      } else {
+        el.setAttribute(at, attrs[at]);
+      }
+    });
     children.forEach(chEl => el.appendChild(typeof chEl === 'string' ? EL(chEl) : chEl));
     return el;
   }
@@ -181,6 +189,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     const wallet = el.data('wallet');
 
     const ctnEl = EL('div.overlay', { style: 'width:500px; margin-left:-250px; height:300px; margin-top:-150px' }, [
+      EL('span.dismiss', { onclick: killOverlay }, [' X ']),
       EL('p', [
         EL('label', ['title:']),
         EL('span.title', [data.title])
@@ -206,8 +215,6 @@ function go(transactions, w2u, w2p, u2p, a2n) {
       ])
     ]);
     document.body.appendChild(ctnEl);
-    ctnEl.onclick = killOverlay;
-    //window.alert(data.title + ' - ' + data.eth.toFixed(3));
   }
 
   transactions.reverse(); // oldest to newest
@@ -239,12 +246,10 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   wallets.forEach(w => {
     const cx = rndNMargin(W, M);
     const cy = rndNMargin(H, M);
-    //console.log(cx, cy);
     const c = s.circle(cx, cy, MIN_R);
     const name = getName(w);
     const n = name[0];
     let clr = (n === 'A' ? ANGEL_CLR : (n === 'P' ? PROJ_CLR : (w in w2u ? USR_CLR : OTH_CLR)));
-    //if (clr === OTH_CLR) { console.log('account: %s', w); }
     c.attr({
       id: w,
       fill: clr,
@@ -256,7 +261,6 @@ function go(transactions, w2u, w2p, u2p, a2n) {
 
     c.click(ev => {
       location.hash = Snap(ev.target).data('wallet');
-      //inspectNode(ev);
     });
     nodes[w] = c;
   });
@@ -267,9 +271,6 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     const n0 = nodes[tr.f];
     const n1 = nodes[tr.t];
     const a = (toTheFuture ? 1 : -1) * SCL * tr.a;
-
-    //window.n0 = n0;
-    //window.n1 = n1;
 
     console.log(
       '#' + trIdx,
@@ -286,8 +287,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     n0.data('eth', e);
 
     let trans = n0.data('trans');
-    trans.push([a, tr.t, /*getName(tr.t),*/ trIdx]);
-    //n0.data('trans', trans);
+    trans.push([a, tr.t, trIdx]);
 
     let r = Math.sqrt(e / Math.PI);
     if (r < MIN_R || isNaN(r)) { r = MIN_R; }
@@ -299,22 +299,11 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     n1.data('eth', e);
 
     trans = n1.data('trans');
-    trans.push([-a, tr.f, /*getName(tr.f),*/ trIdx]);
-    //n1.data('trans', trans);
+    trans.push([-a, tr.f, trIdx]);
 
     r = Math.sqrt(e / Math.PI);
     if (r < MIN_R || isNaN(r)) { r = MIN_R; }
     n1.attr({ r: r }, DUR);
-
-    /*
-    const l = s.line(
-      n0.attr('cx'), n0.attr('cy'),
-      n1.attr('cx'), n1.attr('cy'),
-    ).attr({ stroke: '#000', strokeWidth: 0.3 });
-  
-    l.animate({ strokeWidth: 2 }, DUR / 2)
-      .animate({ strokeWidth: 0.3 }, DUR / 2, null, () => l.remove());
-    */
   }
 
   const START_OF_PITCHES = 10367 - 1; // transaction: 452201_1_1 , ts: (30 Sept 2017 15:00:22 GMT+01:00 DST)
@@ -363,14 +352,19 @@ function go(transactions, w2u, w2p, u2p, a2n) {
 
 
 
-  window.addEventListener('hashchange', ev => {
-    ev.preventDefault();
+  function onHashChange(ev) {
+    ev && ev.preventDefault();
     //ev.stopPropagation();
     const id = location.hash.substring(1);
-    console.log('ID [%s]', id);
+    //console.log('ID [%s]', id);
     if (!id) { return; }
     inspectNode({ target: nodes[id] });
-  });
+  }
+  window.addEventListener('hashchange', onHashChange);
+
+  if (location.hash) {
+    onHashChange();
+  }
 
 
 

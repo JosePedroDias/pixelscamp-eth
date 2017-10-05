@@ -118,3 +118,12 @@ use space bar to toggle animation
 right arrow and left arrow to advance/move back one transaction at a time
 
 transaction info on the console
+
+click on a node to inspect its information (name, inbound and outbound transactions).
+
+
+# TODO
+* GUI for toggling animation
+* toggle node classes
+* change layout on demand
+* find by name
