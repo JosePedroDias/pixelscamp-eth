@@ -13,7 +13,7 @@ svg {
   left: 50%;
   top: 50%;
   margin-left: -600px;
-  margin-top:  -300px;
+  margin-top:  -600px;
 }
 
 .overlay {
@@ -25,6 +25,7 @@ svg {
   border: 1px solid #AAA;
   font-size: 12px;
   overflow-y: auto;
+  box-shadow: 4px 6px 6px 0 rgba(0, 0, 0, 0.33);
 }
 
 .overlay p {
@@ -89,13 +90,13 @@ svg {
   text-align: center;
   line-height: 30px;
   padding: 0;
+  cursor: pointer;
 }
 
 .gui {
   position: absolute;
   left: 0;
   top: 0;
-  background-color: #637F99;
 }
 
 .gui button.off {

@@ -87,7 +87,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
 
 
   const W = 1200;
-  const H = 600;
+  const H = 1200;
   const M = 50;
   //console.log(a2n);
   const s = Snap(W, H);
@@ -242,7 +242,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   const nodes = {};
   window.nodes = nodes;
 
-  const SCL = 0.3;
+  const SCL = 0.1;
   const DUR = 1;
   const MIN_R = 1;//0.01;
 
@@ -393,8 +393,6 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     const v2 = v === 'hidden' ? 'visible' : 'hidden';
     nodesOfKind.forEach(n => n.attr('visibility', v2));
   }
-  window.toggleKind = toggleKind;
-
 
   function toggleKindFact(k) {
     return function (ev) {
@@ -403,16 +401,57 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     };
   }
 
-  (function () {
-    const guiEl = EL('div.gui', [
+
+  function getRadius(n) {
+    return n.attr('r');
+  }
+
+  const PI2 = Math.PI * 2;
+
+  function circularLayout(nodes, rows, dr, radius) {
+    const len = nodes.length;
+    const angle = Math.PI * 2 / len;
+    sort(nodes, getRadius, sortNumber);
+    nodes.forEach((n, i) => {
+      const s = ~~(i / len * rows);
+      const a = angle * (s + 1) * i;
+      const r = radius + s * dr;// + ((a % PI2) / PI2) * dr;
+      //console.log(s, r, a);
+      n.animate({
+        cx: W / 2 + r * Math.cos(a),
+        cy: H / 2 + r * Math.sin(a)
+      }, 500);
+    });
+  }
+  window.nodesPerKind = nodesPerKind;
+  window.circularLayout = circularLayout;
+
+  function layoutFact(k, rows, dr, radius) {
+    const nodes = nodesPerKind[k];
+    return function () {
+      circularLayout(nodes, rows, dr, radius);
+    }
+  }
+
+
+
+  const guiEl = EL('div.gui', [
+    EL('div', [
       EL('button', { id: 'toggle-playback', onclick: togglePlayback }, ['play']),
       EL('span.progress', ['0.0%']),
-      //EL('br'),
+    ]),
+    EL('div', [
       EL('button', { onclick: toggleKindFact('a') }, ['angels']),
       EL('button', { onclick: toggleKindFact('u') }, ['users']),
       EL('button', { onclick: toggleKindFact('p') }, ['projects']),
       EL('button', { onclick: toggleKindFact('o') }, ['other'])
-    ]);
-    document.body.appendChild(guiEl);
-  })();
+    ]),
+    EL('div', [
+      EL('button', { onclick: layoutFact('a', 1, 40, 190) }, ['layout angels']),
+      EL('button', { onclick: layoutFact('u', 4, 30, 400) }, ['layout users']),
+      EL('button', { onclick: layoutFact('p', 2, 60, 280) }, ['layout projects']),
+      EL('button', { onclick: layoutFact('o', 3, 30, 1.5 * 20) }, ['layout other'])
+    ]),
+  ]);
+  document.body.appendChild(guiEl);
 }

@@ -123,7 +123,4 @@ click on a node to inspect its information (name, inbound and outbound transacti
 
 
 # TODO
-* GUI for toggling animation
-* toggle node classes
-* change layout on demand
 * find by name
