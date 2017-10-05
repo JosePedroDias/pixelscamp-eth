@@ -17,6 +17,7 @@ svg {
 }
 
 .overlay {
+  padding: 4px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -32,6 +33,8 @@ svg {
 
 .overlay label {
   font-weight: bold;
+  display: inline-block;
+  min-width: 60px;
 }
 
 .overlay table {
@@ -57,3 +60,20 @@ svg {
 .tar {
   text-align: right;
 }
+
+
+.acc {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.acc a {
+  color: inherit;
+}
+
+.acc-project { background-color: purple; color: #FFF; }
+.acc-angel { background-color: cyan; }
+.acc-user { background-color: orange; }
+.acc-puser { background-color: orange; }
+.acc-other { background-color: gray; color: #FFF; }

@@ -18,9 +18,14 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     return accNo in w2p;
   }
 
+  const specialAccounts = {
+    '3d417b8305aa60688385a1ca56530130c77f8739': 'PIXELSCAMP',
+    '3aaec243e4d22484061b7123d0686136d9edddb1': 'APPLY_BANKRUPCY'
+  }
+
   function getName(accNo) {
-    if (accNo === '3d417b8305aa60688385a1ca56530130c77f8739') { return 'PIXELSCAMP'; }
-    if (accNo === '3aaec243e4d22484061b7123d0686136d9edddb1') { return 'APPLY_BANKRUPCY'; }
+    const special = specialAccounts[accNo];
+    if (special) { return special; }
     if (isProject(accNo)) {
       return `Proj ${w2p[accNo].name}`;
     }
@@ -31,13 +36,53 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     if (isUserWithProject(accNo)) {
       const u = w2u[accNo];
       const p = w2p[u2p[accNo]];
-      return `User ${u.name} of proj ${p.name}`;
+      return `User ${u.name} of ${p.name}`;
     }
     const u = w2u[accNo];
     if (u) {
       return `User ${u.name}`;
     }
-    return `? ${accNo} ?`;
+    return `Account ${accNo}`;
+  }
+
+  function getNameEl(accNo) {
+    const special = specialAccounts[accNo];
+    if (isProject(accNo)) {
+      return EL('span.acc.acc-project', [
+        'Proj ',
+        EL('a', { href: '#' + accNo }, [w2p[accNo].name])
+      ]);
+    }
+    if (isAngel(accNo)) {
+      const u = w2u[accNo];
+      const n = u && u.name || a2n[accNo];
+      return EL('span.acc.acc-angel', [
+        'Angel ',
+        EL('a', { href: '#' + accNo }, [n])
+      ]);
+    }
+    if (isUserWithProject(accNo)) {
+      const u = w2u[accNo];
+      const p = w2p[u2p[accNo]];
+      return EL('span.acc.acc-user.acc-puser', [
+        'User ',
+        EL('a', { href: '#' + accNo }, [u.name]),
+        ' of ',
+        EL('a', { href: '#' + p.wallet }, [p.name])
+      ]);
+    }
+    const u = w2u[accNo];
+    if (u) {
+      const u = w2u[accNo];
+      return EL('span.acc.acc-user', [
+        'User ',
+        EL('a', { href: '#' + accNo }, [u.name])
+      ]);
+    }
+    return EL('span.acc.acc-other', [
+      'Account ',
+      EL('a', { href: '#' + accNo }, [special || accNo])
+    ]);
   }
 
 
@@ -60,7 +105,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
       const accIdx = where[tr[1]];
       if (accIdx === undefined) {
         where[tr[1]] = acc.length;
-        acc.push([tr[0], tr[1], getName(tr[1])]);
+        acc.push([tr[0], tr[1]]);
       } else {
         const row = acc[accIdx];
         row[0] += tr[0];
@@ -113,8 +158,12 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     return el;
   }
 
+  function killOverlay() {
+    let ctnEl = document.querySelector('.overlay');
+    if (ctnEl) { ctnEl.parentNode.removeChild(ctnEl); }
+  }
 
-  function dataFromNode(ev) {
+  function inspectNode(ev) {
     const el = Snap(ev.target);
     const data = el.data();
     //console.log(data.trans);
@@ -122,19 +171,16 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     sort(gt, nthIndexer(0), sortDesc(sortNumber));
     //console.log(gt);
 
-    let ctnEl = document.querySelector('.overlay');
-    if (ctnEl) { ctnEl.parentNode.removeChild(ctnEl); }
+    killOverlay();
 
     const rows = gt.map(t => EL('tr', [
       EL('td.tar', [t[0].toFixed(3)]),
-      EL('td.tal', [
-        EL('a', { target: '_blank', href: `http://moon.pixels.camp:8548/account/0x${t[1]}` }, [
-          t[2]
-        ])
-      ])
+      EL('td.tal', [getNameEl(t[1])])
     ]));
 
-    ctnEl = EL('div.overlay', { style: 'width:400px; margin-left:-200px; height:300px; margin-top:-150px' }, [
+    const wallet = el.data('wallet');
+
+    const ctnEl = EL('div.overlay', { style: 'width:500px; margin-left:-250px; height:300px; margin-top:-150px' }, [
       EL('p', [
         EL('label', ['title:']),
         EL('span.title', [data.title])
@@ -142,8 +188,8 @@ function go(transactions, w2u, w2p, u2p, a2n) {
       EL('p', [
         EL('label', ['account:']),
         EL('span.account', [
-          EL('a', { target: '_blank', href: `http://moon.pixels.camp:8548/account/0x${data.account}` }, [
-            el.id
+          EL('a', { target: '_blank', href: `http://moon.pixels.camp:8548/account/0x${wallet}` }, [
+            wallet
           ])
         ])
       ]),
@@ -160,7 +206,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
       ])
     ]);
     document.body.appendChild(ctnEl);
-    ctnEl.onclick = ev => { ev.target.parentNode.removeChild(ev.target); }
+    ctnEl.onclick = killOverlay;
     //window.alert(data.title + ' - ' + data.eth.toFixed(3));
   }
 
@@ -203,10 +249,15 @@ function go(transactions, w2u, w2p, u2p, a2n) {
       id: w,
       fill: clr,
     })
+      .data('wallet', w)
       .data('title', name)
       .data('eth', 0)
       .data('trans', []);
-    c.click(dataFromNode);
+
+    c.click(ev => {
+      location.hash = Snap(ev.target).data('wallet');
+      //inspectNode(ev);
+    });
     nodes[w] = c;
   });
 
@@ -260,7 +311,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
       n0.attr('cx'), n0.attr('cy'),
       n1.attr('cx'), n1.attr('cy'),
     ).attr({ stroke: '#000', strokeWidth: 0.3 });
-
+  
     l.animate({ strokeWidth: 2 }, DUR / 2)
       .animate({ strokeWidth: 0.3 }, DUR / 2, null, () => l.remove());
     */
@@ -309,4 +360,32 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   });
 
   console.log('PRESS SPACE TO START...');
+
+
+
+  window.addEventListener('hashchange', ev => {
+    ev.preventDefault();
+    //ev.stopPropagation();
+    const id = location.hash.substring(1);
+    console.log('ID [%s]', id);
+    if (!id) { return; }
+    inspectNode({ target: nodes[id] });
+  });
+
+
+
+  const nodesPerKind = {
+    angels: [],
+    users: [],
+    projects: [],
+    other: []
+  };
+  wallets.forEach(w => {
+
+  });
+
+  function toggleKind(kind) {
+    //const accounts = wallets.
+  }
+  window.toggleKind = toggleKind;
 }
