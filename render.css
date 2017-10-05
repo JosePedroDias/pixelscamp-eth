@@ -90,3 +90,15 @@ svg {
   line-height: 30px;
   padding: 0;
 }
+
+.gui {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #637F99;
+}
+
+.gui button.off {
+  background-color: #444;
+  color: #222;
+}

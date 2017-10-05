@@ -42,7 +42,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     if (u) {
       return `User ${u.name}`;
     }
-    return `Account ${accNo}`;
+    return `Other ${accNo}`;
   }
 
   function getNameEl(accNo) {
@@ -80,7 +80,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
       ]);
     }
     return EL('span.acc.acc-other', [
-      'Account ',
+      'Other ',
       EL('a', { href: '#' + accNo }, [special || accNo])
     ]);
   }
@@ -166,7 +166,10 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     return el;
   }
 
-  function killOverlay() {
+  function killOverlay(ev) {
+    if (ev) { // was clicked, remove hash
+      location.hash = '';
+    }
     let ctnEl = document.querySelector('.overlay');
     if (ctnEl) { ctnEl.parentNode.removeChild(ctnEl); }
   }
@@ -272,9 +275,13 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     const n1 = nodes[tr.t];
     const a = (toTheFuture ? 1 : -1) * SCL * tr.a;
 
+    const progressEl = document.querySelector('.progress');
+    const percentage = (trIdx / transactions.length * 100).toFixed(1) + '%';
+    progressEl.firstChild.nodeValue = percentage;
+
     console.log(
       '#' + trIdx,
-      (trIdx / transactions.length * 100).toFixed(1) + '%',
+      percentage,
       n0.data('title'),
       (toTheFuture ? '<-' : '--'),
       tr.a,
@@ -331,19 +338,20 @@ function go(transactions, w2u, w2p, u2p, a2n) {
 
   let interval;
 
+  function togglePlayback() {
+    if (interval) {
+      clearInterval(interval);
+      interval = undefined;
+    } else {
+      interval = setInterval(nextTrans, DUR * 1.25);
+    }
+  }
+
   window.addEventListener('keydown', function (ev) {
     const k = ev.keyCode;
-
     if (k === 39) { nextTrans(); }
     else if (k === 37) { prevTrans(); }
-    else if (k === 32) {
-      if (interval) {
-        clearInterval(interval);
-        interval = undefined;
-      } else {
-        interval = setInterval(nextTrans, DUR * 1.25);
-      }
-    }
+    else if (k === 32) { togglePlayback(); }
     else { return; }
     ev.preventDefault();
   });
@@ -369,17 +377,42 @@ function go(transactions, w2u, w2p, u2p, a2n) {
 
 
   const nodesPerKind = {
-    angels: [],
-    users: [],
-    projects: [],
-    other: []
+    a: [],
+    u: [],
+    p: [],
+    o: []
   };
   wallets.forEach(w => {
-
+    const l = getName(w)[0].toLowerCase();
+    nodesPerKind[l].push(nodes[w]);
   });
 
   function toggleKind(kind) {
-    //const accounts = wallets.
+    const nodesOfKind = nodesPerKind[kind];
+    const v = nodesOfKind[0].attr('visibility');
+    const v2 = v === 'hidden' ? 'visible' : 'hidden';
+    nodesOfKind.forEach(n => n.attr('visibility', v2));
   }
   window.toggleKind = toggleKind;
+
+
+  function toggleKindFact(k) {
+    return function (ev) {
+      ev.target.classList.toggle('off');
+      toggleKind(k);
+    };
+  }
+
+  (function () {
+    const guiEl = EL('div.gui', [
+      EL('button', { id: 'toggle-playback', onclick: togglePlayback }, ['play']),
+      EL('span.progress', ['0.0%']),
+      //EL('br'),
+      EL('button', { onclick: toggleKindFact('a') }, ['angels']),
+      EL('button', { onclick: toggleKindFact('u') }, ['users']),
+      EL('button', { onclick: toggleKindFact('p') }, ['projects']),
+      EL('button', { onclick: toggleKindFact('o') }, ['other'])
+    ]);
+    document.body.appendChild(guiEl);
+  })();
 }
