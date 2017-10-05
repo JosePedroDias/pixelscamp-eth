@@ -41,7 +41,7 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   }
 
 
-  const W = 1000;
+  const W = 1200;
   const H = 600;
   const M = 50;
   //console.log(a2n);
@@ -52,6 +52,116 @@ function go(transactions, w2u, w2p, u2p, a2n) {
   }
   function rndNMargin(n, m) {
     return m / 2 + rndN(n - m);
+  }
+
+  function groupTrans(arr) { // t = [eth, accNo, trIdx]
+    const where = {};
+    return arr.reduce((acc, tr) => {
+      const accIdx = where[tr[1]];
+      if (accIdx === undefined) {
+        where[tr[1]] = acc.length;
+        acc.push([tr[0], tr[1], getName(tr[1])]);
+      } else {
+        const row = acc[accIdx];
+        row[0] += tr[0];
+      }
+      return acc;
+    }, []);
+  }
+
+  function sign(n) { return (n < 0 ? -1 : (n > 0 ? 1 : 0)); }
+
+  function sortNumber(a, b) {
+    return sign(a - b);
+  }
+
+  function sortDesc(sortFn) {
+    return function (a, b) {
+      return sortFn(b, a);
+    }
+  }
+
+  function nthIndexer(idx) {
+    return function (arr) {
+      return arr[idx];
+    }
+  }
+
+  function sort(arr, indexer, sortFn) {
+    arr.sort(function (a, b) { return sortFn(indexer(a), indexer(b)); })
+  }
+
+
+
+  function EL(_nodeName, _attrs, _children) {
+    let attrs = {}, children = [];
+    const argLen = arguments.length;
+    if (argLen === 1) { return document.createTextNode(_nodeName); }
+    else if (argLen === 2) {
+      if (_attrs instanceof Array) { children = _attrs; }
+      else if (_attrs instanceof Object) { attrs = _attrs; }
+      else { throw new Error('2nd arg must be either an object (attrs) or an array (children)!'); }
+    }
+    else if (argLen === 3) { attrs = _attrs; children = _children; }
+    else { throw new Error('Wrong number of params!'); }
+    const classes = (_nodeName.indexOf('.') === -1) ? [_nodeName] : _nodeName.split('.');
+    const nodeName = classes.shift();
+    const el = document.createElement(nodeName);
+    classes.forEach(cl => el.classList.add(cl));
+    Object.keys(attrs).forEach(at => el.setAttribute(at, attrs[at]));
+    children.forEach(chEl => el.appendChild(typeof chEl === 'string' ? EL(chEl) : chEl));
+    return el;
+  }
+
+
+  function dataFromNode(ev) {
+    const el = Snap(ev.target);
+    const data = el.data();
+    //console.log(data.trans);
+    const gt = groupTrans(data.trans);
+    sort(gt, nthIndexer(0), sortDesc(sortNumber));
+    //console.log(gt);
+
+    let ctnEl = document.querySelector('.overlay');
+    if (ctnEl) { ctnEl.parentNode.removeChild(ctnEl); }
+
+    const rows = gt.map(t => EL('tr', [
+      EL('td.tar', [t[0].toFixed(3)]),
+      EL('td.tal', [
+        EL('a', { target: '_blank', href: `http://moon.pixels.camp:8548/account/0x${t[1]}` }, [
+          t[2]
+        ])
+      ])
+    ]));
+
+    ctnEl = EL('div.overlay', { style: 'width:400px; margin-left:-200px; height:300px; margin-top:-150px' }, [
+      EL('p', [
+        EL('label', ['title:']),
+        EL('span.title', [data.title])
+      ]),
+      EL('p', [
+        EL('label', ['account:']),
+        EL('span.account', [
+          EL('a', { target: '_blank', href: `http://moon.pixels.camp:8548/account/0x${data.account}` }, [
+            el.id
+          ])
+        ])
+      ]),
+      EL('p', [
+        EL('label', ['balance:']),
+        EL('span.balance', [data.eth.toFixed(3)])
+      ]),
+      EL('table', [
+        EL('tr', [
+          EL('th.tar', ['amount']),
+          EL('th.tal', ['account'])
+        ]),
+        ...rows
+      ])
+    ]);
+    document.body.appendChild(ctnEl);
+    ctnEl.onclick = ev => { ev.target.parentNode.removeChild(ev.target); }
+    //window.alert(data.title + ' - ' + data.eth.toFixed(3));
   }
 
   transactions.reverse(); // oldest to newest
@@ -92,9 +202,11 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     c.attr({
       id: w,
       fill: clr,
-      dataTitle: name,
-      dataEth: 0
-    });
+    })
+      .data('title', name)
+      .data('eth', 0)
+      .data('trans', []);
+    c.click(dataFromNode);
     nodes[w] = c;
   });
 
@@ -111,24 +223,34 @@ function go(transactions, w2u, w2p, u2p, a2n) {
     console.log(
       '#' + trIdx,
       (trIdx / transactions.length * 100).toFixed(1) + '%',
-      n0.attr('dataTitle'),
+      n0.data('title'),
       (toTheFuture ? '<-' : '--'),
       tr.a,
       (toTheFuture ? '--' : '->'),
-      n1.attr('dataTitle')
+      n1.data('title')
     );
 
-    let e = parseFloat(n0.attr('dataEth'));
+    let e = n0.data('eth');
     e += a;
-    n0.attr({ dataEth: e });
+    n0.data('eth', e);
+
+    let trans = n0.data('trans');
+    trans.push([a, tr.t, /*getName(tr.t),*/ trIdx]);
+    //n0.data('trans', trans);
+
     let r = Math.sqrt(e / Math.PI);
     if (r < MIN_R || isNaN(r)) { r = MIN_R; }
     r = Math.max(r, MIN_R);
     n0.attr({ r: r }, DUR);
 
-    e = parseFloat(n1.attr('dataEth'));
+    e = n1.data('eth');
     e -= a;
-    n1.attr({ dataEth: e });
+    n1.data('eth', e);
+
+    trans = n1.data('trans');
+    trans.push([-a, tr.f, /*getName(tr.f),*/ trIdx]);
+    //n1.data('trans', trans);
+
     r = Math.sqrt(e / Math.PI);
     if (r < MIN_R || isNaN(r)) { r = MIN_R; }
     n1.attr({ r: r }, DUR);

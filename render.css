@@ -3,14 +3,57 @@ html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
+  font-family: sans-serif;
 }
 
 svg {
-  xborder: 1px solid #AAA;
+  border: 1px solid #AAA;
   background-color: #EEE;
   position: absolute;
-  xleft: 50%;
-  xtop: 50%;
-  xmargin-left: -500px;
-  xmargin-top: -300px;
+  left: 50%;
+  top: 50%;
+  margin-left: -600px;
+  margin-top:  -300px;
+}
+
+.overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #FFF;
+  border: 1px solid #AAA;
+  font-size: 12px;
+  overflow-y: auto;
+}
+
+.overlay p {
+  margin: 0;
+}
+
+.overlay label {
+  font-weight: bold;
+}
+
+.overlay table {
+  border-collapse: collapse;
+}
+
+.overlay tr {
+  background-color: #DDD;
+}
+
+.overlay tr:nth-child(even) {
+  background-color: #EEE;
+}
+
+.overlay th, .overlay td {
+  padding: 2px 4px;
+}
+
+.tal {
+  text-align: left;
+}
+
+.tar {
+  text-align: right;
 }
